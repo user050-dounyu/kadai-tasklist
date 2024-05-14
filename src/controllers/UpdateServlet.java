@@ -36,7 +36,7 @@ public class UpdateServlet extends HttpServlet {
         if(_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
-            Task t = em.find(Task.class, (Integer)(request.getSession().getAttribute("task_id")));
+            Task t = em.find(Task.class, (Integer)(request.getSession().getAttribute("tasks_id")));
 
             String content = request.getParameter("content");
             t.setContent(content);
@@ -48,7 +48,7 @@ public class UpdateServlet extends HttpServlet {
             em.getTransaction().commit();
             em.close();
 
-            request.getSession().removeAttribute("task_id");
+            request.getSession().removeAttribute("tasks_id");
 
             response.sendRedirect(request.getContextPath() + "/index");
         }
